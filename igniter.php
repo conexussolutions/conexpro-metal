@@ -5,7 +5,7 @@
  * Description:       Simple plugin to pull metal prices in USD from https://tradingeconomics.com/.
  * Author:            Conexus Solutions Ltd.
  * Author URI:        https://conexussolutions.ca
- * Version:           1.0.1
+ * Version:           1.0.2
  * License:           GPL-3.0+
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       conexpro-metal
