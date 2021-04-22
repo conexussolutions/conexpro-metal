@@ -35,7 +35,7 @@ function conexpro_metals_shortcode_func($atts = array())
             // replace [currency_symbol] placeholder
             include_once(CNXSMETALSPATH . '/backend/currency_symbols.php');
             $output  = str_replace("[currency_symbol]", $currency_symbols['USD'], $output);
-        }
+}
         // replace [unit] placeholder
         if (isset($attribs["unit"])) {
             $output  = str_replace("[unit]", $response["unit"], $output);
