@@ -17,7 +17,7 @@ add_shortcode("conexpro-metal", "conexpro_metals_shortcode_func");
  */
 function conexpro_metals_shortcode_func($atts = array())
 {
-    $attribs = shortcode_atts(array("type"=> "", "unit" => "Please set unit type in shortcode. ie. unit='Lbs' "), $atts);
+    $attribs = shortcode_atts(array("type" => "", "unit" => "Please set unit type in shortcode. ie. unit='Lbs' "), $atts);
 
     //type is required
     if (trim($attribs["type"]) == "") {
@@ -35,36 +35,36 @@ function conexpro_metals_shortcode_func($atts = array())
             // replace [currency_symbol] placeholder
             include_once(CNXSMETALSPATH . '/backend/currency_symbols.php');
             $output  = str_replace("[currency_symbol]", $currency_symbols['USD'], $output);
-            }
-            // replace [unit] placeholder
-            if (isset($attribs["unit"])) {
-                $output  = str_replace("[unit]", $response["unit"], $output);
-            }
-            // replace [price] placeholder
-            if (isset($metal_info["value"])) {
-                $output  = str_replace("[price]", $metal_info["value"], $output);
-            }
-            // replace [name] placeholder
-            if (isset($metal_info["full_name"])) {
-                $output  = str_replace("[name]", $metal_info["full_name"], $output);
-            }
-            // replace [ticker] placeholder
-            if (isset($metal_info["ticker"])) {
-                $output  = str_replace("[ticker]", $metal_info["ticker"], $output);
-            }
-            update_option('conexpro_metal_error_found', 'Working');
-            update_option('conexpro_metal_last_ran', time());
-        } else {
-            $output  = get_option('conexpro_metal_error_display');
-            update_option('conexpro_metal_error_found', 'stopped');
-            wp_mail(
-                get_option('admin_email'),
-                "Heads up: Fething Metal Prices is not working",
-                "System have found that url: $url did not return the expected result."
-            );
         }
+        // replace [unit] placeholder
+        if (isset($attribs["unit"])) {
+            $output  = str_replace("[unit]", $response["unit"], $output);
+        }
+        // replace [price] placeholder
+        if (isset($metal_info["value"])) {
+            $output  = str_replace("[price]", $metal_info["value"], $output);
+        }
+        // replace [name] placeholder
+        if (isset($metal_info["full_name"])) {
+            $output  = str_replace("[name]", $metal_info["full_name"], $output);
+        }
+        // replace [ticker] placeholder
+        if (isset($metal_info["ticker"])) {
+            $output  = str_replace("[ticker]", $metal_info["ticker"], $output);
+        }
+        update_option('conexpro_metal_error_found', 'Working');
+        update_option('conexpro_metal_last_ran', time());
+    } else {
+        $output  = get_option('conexpro_metal_error_display');
+        update_option('conexpro_metal_error_found', 'stopped');
+        wp_mail(
+            get_option('admin_email'),
+            "Heads up: Fething Metal Prices is not working",
+            "System have found that url: $url did not return the expected result."
+        );
     }
-    return wpautop(stripslashes($output));
+    
+    return stripslashes($output);
 }
 
 
